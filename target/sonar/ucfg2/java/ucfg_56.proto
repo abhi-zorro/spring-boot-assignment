@@ -1,0 +1,157 @@
+
+?com.zemoso.pomodoroapp.entity.Task#toString()Ljava/lang/String;d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java. .("1*∑ 
+1d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ /(ü
+ú
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 0(
+%0java.lang.String"__concat*	
+Task{*
+id=≠
+™
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 0(
+%1java.lang.String"__concat*
+
+%0java.lang.String*
+""¥
+±
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 1(
+%2java.lang.String"__concat*
+
+%1java.lang.String*
+	, title='∫
+∑
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java1 1(#
+%3java.lang.String"__id*1*/$
+"com.zemoso.pomodoroapp.entity.Task"
+titleø
+º
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 1(#
+%4java.lang.String"__concat*
+
+%2java.lang.String*
+
+%3java.lang.String≠
+™
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 1(*
+%5java.lang.String"__concat*
+
+%4java.lang.String*
+\'≥
+∞
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 2(
+%6java.lang.String"__concat*
+
+%5java.lang.String*
+
+, note='π
+∂
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java2 2(!
+%7java.lang.String"__id*0*.$
+"com.zemoso.pomodoroapp.entity.Task"
+noteø
+º
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 2(!
+%8java.lang.String"__concat*
+
+%6java.lang.String*
+
+%7java.lang.String≠
+™
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 2((
+%9java.lang.String"__concat*
+
+%8java.lang.String*
+\'ª
+∏
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 3(!
+%10java.lang.String"__concat*
+
+%9java.lang.String*
+, estPomodoros=Ø
+¨
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 3(0
+%11java.lang.String"__concat*
+
+%10java.lang.String*
+""∂
+≥
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 4(
+%12java.lang.String"__concat*
+
+%11java.lang.String*
+	, status=Ø
+¨
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 4($
+%13java.lang.String"__concat*
+
+%12java.lang.String*
+""¥
+±
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 5(
+%14java.lang.String"__concat*
+
+%13java.lang.String*	
+, user=Ã
+…
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java5 5( )
+%15"com.zemoso.pomodoroapp.entity.User"__id*0*.$
+"com.zemoso.pomodoroapp.entity.Task"
+user‘
+—
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 5( 
+%16java.lang.String"__concat*
+
+%14java.lang.String*+
+)
+%15"com.zemoso.pomodoroapp.entity.Userº
+π
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 6(!
+%17java.lang.String"__concat*
+
+%16java.lang.String*
+, pomodoroList=¿
+Ω
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java6$ 6(0
+%18java.util.List"__id*8*6$
+"com.zemoso.pomodoroapp.entity.Task"
+pomodoroList¿
+Ω
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 6(0
+%19java.lang.String"__concat*
+
+%17java.lang.String*
+
+%18java.util.ListÆ
+´
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 7(
+%20java.lang.String"__concat*
+
+%19java.lang.String*
+}"Å
+d
+Z/home/abhiB/IdeaProjects/pomodoroapp/src/main/java/com/zemoso/pomodoroapp/entity/Task.java/ 7(
+
+%20java.lang.StringB&$
+"com.zemoso.pomodoroapp.entity.Task

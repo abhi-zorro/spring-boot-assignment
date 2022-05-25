@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PomoController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pomodoroapp</a> &gt; <a href="index.source.html" class="el_package">com.zemoso.pomodoroapp.controller</a> &gt; <span class="el_source">PomoController.java</span></div><h1>PomoController.java</h1><pre class="source lang-java linenums">package com.zemoso.pomodoroapp.controller;
+
+import com.zemoso.pomodoroapp.dao.PomodoroRepository;
+import com.zemoso.pomodoroapp.dao.TaskRepository;
+import com.zemoso.pomodoroapp.dao.UserRepository;
+import com.zemoso.pomodoroapp.dto.TaskDto;
+import com.zemoso.pomodoroapp.entity.Pomodoro;
+import com.zemoso.pomodoroapp.entity.Task;
+import com.zemoso.pomodoroapp.entity.User;
+import com.zemoso.pomodoroapp.exception.TaskNotFoundException;
+import com.zemoso.pomodoroapp.mapservice.MapperService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+import java.util.Optional;
+
+@Controller
+@RequestMapping(&quot;/pomodoro&quot;)
+<span class="fc" id="L28">@Slf4j</span>
+<span class="fc" id="L29">public class PomoController {</span>
+
+    private User currentUser;
+
+    private static final String REDIRECTURL =&quot;redirect:/pomodoro/viewTasks&quot;;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private TaskRepository taskRepository;
+
+    @Autowired
+    private PomodoroRepository pomodoroRepository;
+
+    @Autowired
+    private MapperService mapperService;
+
+    @GetMapping(&quot;/index&quot;)
+    public String index(){
+<span class="nc" id="L48">        return &quot;redirect:/pomodoro/phome&quot;;</span>
+    }
+
+    @GetMapping(&quot;/&quot;)
+    public String getHome(Model theModel, Authentication authentication){
+<span class="nc" id="L53">        this.currentUser = userRepository.findByEmail(authentication.getName());</span>
+<span class="nc" id="L54">        return &quot;pomodoro/phome&quot;;</span>
+    }
+
+    @GetMapping(&quot;/createTask&quot;)
+    public String showTaskForm(Model theModel){
+<span class="nc" id="L59">        Task theTask = new Task();</span>
+<span class="nc" id="L60">        theModel.addAttribute(&quot;task&quot;, theTask);</span>
+<span class="nc" id="L61">        return &quot;pomodoro/task-form&quot;;</span>
+    }
+
+    @PostMapping(&quot;/create&quot;)
+    public String createTask(@ModelAttribute(&quot;theTask&quot;) TaskDto theTaskDto){
+<span class="nc" id="L66">        log.info(&quot;&gt;&gt;&gt;&gt;&gt; The task details: &quot; + theTaskDto.toString());</span>
+
+        //convert taskdto to task entity
+<span class="nc" id="L69">        Task theTask = mapperService.convertToEntity(theTaskDto);</span>
+<span class="nc" id="L70">        log.info(&quot;&gt;&gt;&gt;&gt;&gt; Task details after conversion: &quot; + theTask.toString());</span>
+<span class="nc" id="L71">        this.currentUser.addTask(theTask);</span>
+<span class="nc" id="L72">        userRepository.save(this.currentUser);</span>
+<span class="nc" id="L73">        return REDIRECTURL;</span>
+    }
+
+    @GetMapping(&quot;/viewTasks&quot;)
+    public String showAllTasks(Model theModel){
+<span class="nc" id="L78">        List&lt;Task&gt; tasks = taskRepository.findByUserId(this.currentUser.getId());</span>
+<span class="nc" id="L79">        log.info(&quot;&gt;&gt;&gt;&gt;&gt; Tasks size: &quot;+tasks.size());</span>
+<span class="nc" id="L80">        theModel.addAttribute(&quot;tasks&quot;,tasks);</span>
+<span class="nc" id="L81">        return &quot;pomodoro/view-tasks&quot;;</span>
+    }
+
+    @GetMapping(&quot;/removeTask&quot;)
+    public String removeTask(@RequestParam(&quot;taskId&quot;) int taskId, Model theModel){
+<span class="nc" id="L86">        Optional&lt;Task&gt; result = taskRepository.findById(taskId);</span>
+        Task task;
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        if(result.isPresent()){</span>
+<span class="nc" id="L89">            task = result.get();</span>
+        }
+        else{
+<span class="nc" id="L92">            throw new TaskNotFoundException();</span>
+        }
+<span class="nc" id="L94">        log.info(&quot;Task to be deleted &quot; + task.getTitle() + task.getId());</span>
+<span class="nc" id="L95">        pomodoroRepository.deleteByTaskId(taskId);</span>
+<span class="nc" id="L96">        taskRepository.deleteByTaskId(taskId);</span>
+<span class="nc" id="L97">        this.currentUser.deleteTask(task);</span>
+<span class="nc" id="L98">        userRepository.save(this.currentUser);</span>
+<span class="nc" id="L99">        return REDIRECTURL;</span>
+    }
+
+    @GetMapping(&quot;/startTask&quot;)
+    public String startTask(@RequestParam(&quot;taskId&quot;) int taskId, Model theModel){
+        //get the current time
+<span class="nc" id="L105">        log.info(&quot;&gt;&gt;&gt;&gt;&gt; starting time: &quot; + LocalTime.now());</span>
+
+        //get the task
+<span class="nc" id="L108">        Optional&lt;Task&gt; result = taskRepository.findById(taskId);</span>
+        Task task;
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        if(result.isPresent()){</span>
+<span class="nc" id="L111">            task = result.get();</span>
+        }
+        else{
+<span class="nc" id="L114">            throw new TaskNotFoundException();</span>
+        }
+
+        // check if the task has any pomodoros
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        if(!task.getPomodoroList().isEmpty()){</span>
+<span class="nc" id="L119">            log.info(&quot;&gt;&gt;&gt;&gt;&gt; The pomodoros are : &quot; + task.getPomodoroList().toArray());</span>
+        }
+        else {
+<span class="nc" id="L122">            Pomodoro pomodoro = new Pomodoro();</span>
+<span class="nc" id="L123">            pomodoro.setStartTime(Time.valueOf(LocalTime.now()));</span>
+<span class="nc" id="L124">            pomodoro.setEndTime(Time.valueOf(LocalTime.now().plusMinutes(25L)));</span>
+<span class="nc" id="L125">            pomodoro.setStatus(0);</span>
+<span class="nc" id="L126">            pomodoro.setDate(Date.valueOf(LocalDate.now()));</span>
+<span class="nc" id="L127">            task.addPomodoro(pomodoro);</span>
+<span class="nc" id="L128">            taskRepository.save(task);</span>
+        }
+<span class="nc" id="L130">        theModel.addAttribute(&quot;task&quot;, task);</span>
+<span class="nc" id="L131">        return &quot;dojo/pomo-mode&quot;;</span>
+    }
+
+    @GetMapping(&quot;/markComplete&quot;)
+    public String markAsComplete(@RequestParam(&quot;taskId&quot;) int taskId, Model theModel){
+<span class="nc" id="L136">        log.info(&quot;&gt;&gt;&gt;&gt;&gt; task id: &quot; + taskId + &quot;user id &quot; + this.currentUser.getId() + this.currentUser.getFirstName());</span>
+
+<span class="nc" id="L138">        List&lt;Task&gt; totalTasks = this.currentUser.getTaskList();</span>
+<span class="nc" id="L139">        Task currentTask=null;</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">        for(Task task: totalTasks){</span>
+<span class="nc" id="L141">            log.info(&quot;&gt;&gt;&gt;&gt;&gt; Task &quot; + task.getId() );</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">            if(task.getId()==taskId){</span>
+<span class="nc" id="L143">                currentTask = task;</span>
+            }
+<span class="nc" id="L145">        }</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">        if(currentTask == null){</span>
+<span class="nc" id="L147">            throw new TaskNotFoundException();</span>
+        }
+
+<span class="nc" id="L150">        List&lt;Pomodoro&gt; pomos = pomodoroRepository.findByTaskId(taskId);</span>
+<span class="nc" id="L151">        log.info(&quot;&gt;&gt;&gt;&gt;&gt; Pomos status: &quot; + pomos.get(0).getStatus());</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">        for(Pomodoro pomo: pomos) {</span>
+<span class="nc" id="L153">            log.info(&quot;&gt;&gt;&gt;&gt;&gt; pomo details &quot; + pomo.getId());</span>
+<span class="nc" id="L154">            pomo.setStatus(1);</span>
+<span class="nc" id="L155">            pomodoroRepository.save(pomo);</span>
+<span class="nc" id="L156">        }</span>
+<span class="nc" id="L157">        currentTask.setStatus(true);</span>
+<span class="nc" id="L158">        taskRepository.save(currentTask);</span>
+<span class="nc" id="L159">        return REDIRECTURL;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

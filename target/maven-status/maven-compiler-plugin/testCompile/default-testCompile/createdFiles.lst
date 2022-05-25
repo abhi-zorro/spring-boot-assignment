@@ -1,0 +1,5 @@
+com/zemoso/pomodoroapp/repositorytests/UserRepositoryTests.class
+com/zemoso/pomodoroapp/servicetests/UserServiceTests.class
+com/zemoso/pomodoroapp/PomodoroappApplicationTests.class
+com/zemoso/pomodoroapp/repositorytests/TaskTests.class
+com/zemoso/pomodoroapp/repositorytests/PomodoroTests.class

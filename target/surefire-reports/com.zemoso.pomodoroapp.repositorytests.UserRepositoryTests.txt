@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: com.zemoso.pomodoroapp.repositorytests.UserRepositoryTests
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.257 s <<< FAILURE! - in com.zemoso.pomodoroapp.repositorytests.UserRepositoryTests
+givenUserList_whenFindAll_thenUserList  Time elapsed: 0.185 s  <<< ERROR!
+java.lang.StackOverflowError
+

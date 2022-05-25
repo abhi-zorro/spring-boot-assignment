@@ -1,0 +1,5 @@
+com.zemoso.pomodoroapp.service.UserServiceImpl#findById(I)Lcom/zemoso/pomodoroapp/entity/User;
+java.util.Optional#isPresent()Z
+com.zemoso.pomodoroapp.exception.UserNotFoundException#instance-init#
+com.zemoso.pomodoroapp.exception.UserNotFoundException#<init>()V
+java.util.Optional#get()Ljava/lang/Object;

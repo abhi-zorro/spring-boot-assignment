@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoggingAspect.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pomodoroapp</a> &gt; <a href="index.source.html" class="el_package">com.zemoso.pomodoroapp.aop</a> &gt; <span class="el_source">LoggingAspect.java</span></div><h1>LoggingAspect.java</h1><pre class="source lang-java linenums">package com.zemoso.pomodoroapp.aop;
+
+import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
+
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
+
+@Aspect
+@Component
+<span class="fc" id="L13">@Slf4j</span>
+<span class="fc" id="L14">public class LoggingAspect {</span>
+
+    //pointcut expressions for user controller
+    @Pointcut(&quot;execution(* com.zemoso.pomodoroapp.controller.*.*(..))&quot;)
+    private void forControllerPkg(){
+<span class="nc" id="L19">        log.info(&quot;&gt;&gt;&gt;&gt; PRIVATE POINTCUT METHOD: forControllerPkg() -&gt; to trigger all methods in controller pkg&quot;);</span>
+<span class="nc" id="L20">    }</span>
+
+    @Pointcut(&quot;execution(* com.zemoso.pomodoroapp.dao.*.*(..))&quot;)
+    private void forDaoPkg(){
+<span class="nc" id="L24">        log.info(&quot;&gt;&gt;&gt;&gt; PRIVATE POINTCUT METHOD: forDaoPkg() -&gt; to trigger all methods in dao pkg&quot;);</span>
+<span class="nc" id="L25">    }</span>
+
+    @Pointcut(&quot;execution(* com.zemoso.pomodoroapp.service.*.*(..))&quot;)
+    private void forServicePkg(){
+<span class="nc" id="L29">        log.info(&quot;&gt;&gt;&gt;&gt;&gt; PRIVATE forServicePkg() -&gt; to trigger all methods in service pkg&quot;);</span>
+<span class="nc" id="L30">    }</span>
+
+    @Pointcut(&quot;execution(* com.zemoso.pomodoroapp.security.*.*(..))&quot;)
+    private void forSecurityPkg(){
+<span class="nc" id="L34">        log.info(&quot;&gt;&gt;&gt;&gt;&gt; PRIVATE forSecurityPkg() -&gt; to trigger all methods in security pkg&quot;);</span>
+<span class="nc" id="L35">    }</span>
+
+    @Pointcut(&quot;forControllerPkg() || forDaoPkg() || forServicePkg() || forSecurityPkg() &quot;)
+    private void forAppFlow(){
+<span class="nc" id="L39">        log.info(&quot;&gt;&gt;&gt;&gt;&gt; PRIVATE forAppFlow() -&gt; to trigger all the methods in all mentioned pkgs&quot;);</span>
+<span class="nc" id="L40">    }</span>
+
+    @Before(&quot;forAppFlow()&quot;)
+    public void before(JoinPoint theJoinPoint){
+<span class="fc" id="L44">        String method = theJoinPoint.getSignature().toShortString();</span>
+<span class="fc" id="L45">        log.info(&quot;====&gt; in @Before: calling method &quot; + method);</span>
+<span class="fc" id="L46">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
