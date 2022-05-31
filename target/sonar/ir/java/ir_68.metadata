@@ -1,3 +1,0 @@
-com.zemoso.pomodoroapp.entity.MyUserPrincipal#getAuthorities()Ljava/util/Collection;
-java.util.ArrayList#<init>()V
-java.util.ArrayList#instance-init#

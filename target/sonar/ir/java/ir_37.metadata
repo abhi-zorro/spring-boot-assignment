@@ -1,3 +1,0 @@
-com.zemoso.pomodoroapp.controller.UserController#registerUser(Lorg/springframework/ui/Model;)Ljava/lang/String;
-com.zemoso.pomodoroapp.entity.User#instance-init#
-com.zemoso.pomodoroapp.entity.User#<init>()V

@@ -1,7 +1,0 @@
-organization=abhi-zorro
-projectKey=1d8b7e34415a4f6f82c3b58e0c5153dddbc7c0ef
-serverUrl=https://sonarcloud.io
-serverVersion=8.0.0.29017
-dashboardUrl=https://sonarcloud.io/dashboard?id=1d8b7e34415a4f6f82c3b58e0c5153dddbc7c0ef
-ceTaskId=AYDYmKjGnm_mkLK9MvPy
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AYDYmKjGnm_mkLK9MvPy

@@ -1,3 +1,0 @@
-com.zemoso.pomodoroapp.security.CustomSecurityConfig#authenticationProvider()Lorg/springframework/security/authentication/dao/DaoAuthenticationProvider;
-org.springframework.security.authentication.dao.DaoAuthenticationProvider#instance-init#
-org.springframework.security.authentication.dao.DaoAuthenticationProvider#<init>()V

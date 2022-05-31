@@ -1,2 +1,0 @@
-com.zemoso.pomodoroapp.PomodoroappApplication#main([Ljava/lang/String;)V
-org.springframework.boot.SpringApplication#run(Ljava/lang/Class;[Ljava/lang/String;)Lorg/springframework/context/ConfigurableApplicationContext;
